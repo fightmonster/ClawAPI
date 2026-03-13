@@ -46,10 +46,10 @@ captures/
 .idea/libraries
 .idea/caches
 
-# Keystore files
-# Uncomment the following lines if you do not want to check your keystore files in.
-#*.jks
-#*.keystore
+# Keystore files - 重要：不要提交签名文件！
+*.jks
+*.keystore
+app/keystore.properties
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
