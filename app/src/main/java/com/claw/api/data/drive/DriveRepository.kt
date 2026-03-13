@@ -4,6 +4,7 @@ import com.google.api.services.drive.Drive
 import com.google.api.services.drive.model.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.OutputStream
 
 data class DriveFile(
     val id: String,
@@ -70,6 +71,26 @@ class DriveRepository(private val driveService: Drive) {
             val outputStream = java.io.ByteArrayOutputStream()
             driveService.files().get(fileId).executeMediaAndDownloadTo(outputStream)
             Result.success(outputStream.toByteArray())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getFileInfo(fileId: String): Result<com.google.api.services.drive.model.File> = withContext(Dispatchers.IO) {
+        try {
+            val file = driveService.files().get(fileId)
+                .setFields("id,name,mimeType,size,modifiedTime")
+                .execute()
+            Result.success(file)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun downloadFile(fileId: String, outputStream: OutputStream): Result<Unit> = withContext(Dispatchers.IO) {
+        try {
+            driveService.files().get(fileId).executeMediaAndDownloadTo(outputStream)
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }
