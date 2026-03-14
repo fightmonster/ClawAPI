@@ -12,6 +12,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cloud
+import androidx.compose.material.icons.filled.Email
 import com.claw.api.ui.drive.DriveScreen
 import com.claw.api.ui.gmail.GmailScreen
 import com.claw.api.ui.login.LoginScreen
@@ -71,7 +74,7 @@ fun MainScreen(onLogout: () -> Unit) {
             NavigationBar {
                 NavigationBarItem(
                     icon = { 
-                        androidx.compose.material.icons.Icons.Default.Cloud 
+                        Icon(Icons.Filled.Cloud, contentDescription = "Drive")
                     },
                     label = { Text("Drive") },
                     selected = selectedTab == 0,
@@ -79,7 +82,7 @@ fun MainScreen(onLogout: () -> Unit) {
                 )
                 NavigationBarItem(
                     icon = { 
-                        androidx.compose.material.icons.Icons.Default.Email
+                        Icon(Icons.Filled.Email, contentDescription = "Gmail")
                     },
                     label = { Text("Gmail") },
                     selected = selectedTab == 1,
