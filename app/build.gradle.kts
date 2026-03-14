@@ -90,6 +90,11 @@ dependencies {
         exclude(group = "org.apache.httpcomponents")
     }
     
+    // Google API Client for Android (provides GoogleAccountCredential)
+    implementation("com.google.api-client:google-api-client-android:2.4.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
