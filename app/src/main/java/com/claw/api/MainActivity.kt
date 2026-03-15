@@ -65,6 +65,7 @@ fun ClawAPIApp(navController: NavHostController) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(onLogout: () -> Unit) {
     var selectedTab by remember { mutableStateOf(0) }
