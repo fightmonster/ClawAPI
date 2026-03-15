@@ -28,11 +28,11 @@ class LoginViewModel : ViewModel() {
     var errorMessage by mutableStateOf<String?>(null)
         private set
     
-    fun setLoading(loading: Boolean) {
+    fun updateLoading(loading: Boolean) {
         isLoading = loading
     }
     
-    fun setError(error: String?) {
+    fun updateError(error: String?) {
         errorMessage = error
     }
 }
@@ -60,15 +60,15 @@ fun LoginScreen(
             val task = com.google.android.gms.auth.api.signin.GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                viewModel.setLoading(false)
+                viewModel.updateLoading(false)
                 onLoginSuccess()
             } catch (e: ApiException) {
-                viewModel.setError("登录失败: ${e.message}")
-                viewModel.setLoading(false)
+                viewModel.updateError("登录失败: ${e.message}")
+                viewModel.updateLoading(false)
             }
         } else {
-            viewModel.setError("登录取消")
-            viewModel.setLoading(false)
+            viewModel.updateError("登录取消")
+            viewModel.updateLoading(false)
         }
     }
     
@@ -106,8 +106,8 @@ fun LoginScreen(
             } else {
                 Button(
                     onClick = {
-                        viewModel.setLoading(true)
-                        viewModel.setError(null)
+                        viewModel.updateLoading(true)
+                        viewModel.updateError(null)
                         launcher.launch(authManager.googleSignInClient.signInIntent)
                     },
                     modifier = Modifier
